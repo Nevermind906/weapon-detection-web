@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1 align="center">Список угроз</h1>
+
+    {% if threat_list %}
+    <table class = "table">
+      <thead>
+          <tr>
+            <th scope="col">Терминал</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Обнаруженные угрозы</th>
+            <th scope="col">Актуальна</th>
+            <th scope="col">Изображение</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for threat in threat_list %}
+          <tr>
+            <td>{{ threat.terminal }}</td>
+            <td>{{ threat.date }}</td>
+            <td>{{ threat.threats }}</td>
+            <td>{{ threat.ru_is_relevant}}</td>
+            <td>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Изображение
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <img src="{{ threat.path }}"  class="img-fluid">
+                  </div>
+                </div>
+
+            </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+    {% else %}
+      <p align="center">Угрозы отсутствуют.</p>
+    {% endif %}
+{% endblock %}
